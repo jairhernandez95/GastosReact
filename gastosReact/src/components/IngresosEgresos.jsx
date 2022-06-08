@@ -28,7 +28,6 @@ const IngresosEgresos = () => {
       <p className='money minus'>-${egresos}</p>
     </div>
     </div>
-
   )
 }
 

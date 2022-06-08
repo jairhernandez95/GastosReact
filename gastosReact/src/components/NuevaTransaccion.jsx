@@ -1,13 +1,32 @@
-import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { GlobalContext } from '../context/GlobalContext'
 
 const NuevaTransaccion = () => {
   const [texto, setTexto] = useState('')
   const [importe, setImporte] = useState('')
+
+  const { addTransaccion } = useContext(GlobalContext)
+
+  const onSubmit = event => {
+    event.preventDefault()
+
+    const newTransaccion = {
+      id: Math.floor(Math.random()*100000000),
+      texto,
+      importe: +importe
+    }
+
+    addTransaccion(newTransaccion)
+
+    setTexto('')
+    setImporte('')
+
+  }
+
   return (
     <>
       <h3>Agregar Nueva Transacción</h3>
-      <form>
+      <form onSubmit={onSubmit}>
         <div className="form-control">
           <label htmlFor="texto">Descripción:</label>
           <input type="text" value={texto} onChange={(event) => setTexto(event.target.value)} placeholder='Teclea una descripción' />
